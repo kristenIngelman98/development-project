@@ -8,6 +8,7 @@ const Label = styled.label`
   margin-bottom: 12px;
   cursor: pointer;
   font-size: 22px;
+  color: white;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

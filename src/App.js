@@ -2,6 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import TodoList from './TodoList';
 import uuid from 'react-uuid'
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+// import { formatDistance, subDays } from 'date-fns'
+
+// formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true })
+// //=> "3 days ago"
+
+// formatDistance()
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
@@ -15,10 +23,11 @@ const Title = styled.h1`
 
 const Wrapper = styled.section`
   padding: 4em;
-  // background: papayawhip;
+  background: papayawhip;
   background: black;
   border-radius: 10px;
   height: 87vh;
+  color: white;
 `;
 
 const Button = styled.button`
@@ -73,7 +82,6 @@ function App() {
   // useEffect saves all todos to local storage
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
-    console.log(localStorage)
   }, [todos])
 
   function toggleTodo(id) {
@@ -86,7 +94,6 @@ function App() {
   function handleAddTodo(e) {
     const name = todoNameRef.current.value
     if (name === '') return
-    console.log('NAME', name)
     setTodos(prevTodos => [...prevTodos, { id: uuid(), name: name, complete: false}])
     todoNameRef.current.value = null
   }
@@ -100,7 +107,7 @@ function App() {
   return (
     <>
     <Wrapper>
-      <Title>To Do List</Title>
+      <Title>To Do List <FontAwesomeIcon icon="coffee" /></Title>
       <AddTodoSection>
       <Input type="text" placeholder="What do you need to get done?" ref={todoNameRef}></Input>
       <Button onClick={handleAddTodo}>Add Todo</Button>
@@ -108,7 +115,8 @@ function App() {
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <div>{todos.filter(todo => !todo.complete).length} left to do</div>
       <Button onClick={handleClearTodos}>Clear Completed Todos</Button>
-      
+      <FontAwesomeIcon icon="check-square" />
+
      </Wrapper>
     </>
   )
