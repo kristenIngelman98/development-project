@@ -1,9 +1,53 @@
 import React, { useState, useRef, useEffect } from 'react';
 import TodoList from './TodoList';
 import uuid from 'react-uuid'
-
+import styled from 'styled-components';
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
+
+// Styled Components 
+const Title = styled.h1`
+  font-size: 1.em;
+  text-align: center;
+  color: palevioletred;
+`;
+
+const Wrapper = styled.section`
+  padding: 4em;
+  background: papayawhip;
+`;
+
+const Button = styled.button`
+  background-color: #555555;
+  border: 2px solid #555555;
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  transition-duration: 0.4s;
+
+  &:hover {
+    background-color: #fff;
+    color: #555555;
+  }
+`;
+
+const Input = styled.input`
+  font-size: 18px;
+  padding: 10px;
+  margin: 10px;
+  background: pink;
+  border: none;
+  border-radius: 4px;
+  width: 300px;
+  ::placeholder {
+    color: palevioletred;
+  }
+`;
+
 
 function App() {
   const [todos, setTodos] = useState(() => {
@@ -44,11 +88,14 @@ function App() {
 
   return (
     <>
-     <TodoList todos={todos} toggleTodo={toggleTodo} />
-     <input ref={todoNameRef} type="text"></input>
-     <button onClick={handleAddTodo}>Add Todo</button>
-     <button onClick={handleClearTodos}>Clear Completed Todos</button>
-     <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+    <Wrapper>
+      <Title>To Do List</Title>
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <Input type="text" placeholder="What do you need to get done?" ref={todoNameRef}></Input>
+      <Button onClick={handleAddTodo}>Add Todo</Button>
+      <Button onClick={handleClearTodos}>Clear Completed Todos</Button>
+      <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+     </Wrapper>
     </>
   )
 }
