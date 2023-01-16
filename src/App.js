@@ -10,11 +10,15 @@ const Title = styled.h1`
   font-size: 1.em;
   text-align: center;
   color: palevioletred;
+  text-transform: uppercase;
 `;
 
 const Wrapper = styled.section`
   padding: 4em;
-  background: papayawhip;
+  // background: papayawhip;
+  background: black;
+  border-radius: 10px;
+  height: 87vh;
 `;
 
 const Button = styled.button`
@@ -39,13 +43,20 @@ const Input = styled.input`
   font-size: 18px;
   padding: 10px;
   margin: 10px;
+  margin-left: 0;
   background: pink;
   border: none;
   border-radius: 4px;
-  width: 300px;
+  width: 50%;
+  max-width:600px;
+
   ::placeholder {
     color: palevioletred;
   }
+`;
+
+const AddTodoSection = styled.section`
+  text-align: center;
 `;
 
 
@@ -90,11 +101,14 @@ function App() {
     <>
     <Wrapper>
       <Title>To Do List</Title>
-      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <AddTodoSection>
       <Input type="text" placeholder="What do you need to get done?" ref={todoNameRef}></Input>
       <Button onClick={handleAddTodo}>Add Todo</Button>
-      <Button onClick={handleClearTodos}>Clear Completed Todos</Button>
+      </AddTodoSection>
+      <TodoList todos={todos} toggleTodo={toggleTodo} />
       <div>{todos.filter(todo => !todo.complete).length} left to do</div>
+      <Button onClick={handleClearTodos}>Clear Completed Todos</Button>
+      
      </Wrapper>
     </>
   )
