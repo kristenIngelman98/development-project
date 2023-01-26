@@ -107,7 +107,7 @@ function App() {
   return (
     <>
     <Wrapper>
-      <Title>To Do List <FontAwesomeIcon icon="coffee" /></Title>
+      <Title>To Do List <FontAwesomeIcon icon="coffee" size="6x" border /></Title>
       <AddTodoSection>
       <Input type="text" placeholder="What do you need to get done?" ref={todoNameRef}></Input>
       <Button onClick={handleAddTodo}>Add Todo</Button>
@@ -116,7 +116,14 @@ function App() {
       <div>{todos.filter(todo => !todo.complete).length} left to do</div>
       <Button onClick={handleClearTodos}>Clear Completed Todos</Button>
       <FontAwesomeIcon icon="check-square" />
+    <div>
+      <FontAwesomeIcon icon={['fab', 'apple']} />
+      <FontAwesomeIcon icon={['fab', 'microsoft']} />
+      <FontAwesomeIcon icon={['fab', 'google']} />
 
+      <FontAwesomeIcon icon="check-square" size="lg" />
+      With Coffee Checked, these companies always know their coffee is hot and ready!
+    </div>
      </Wrapper>
     </>
   )
