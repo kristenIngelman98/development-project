@@ -3,7 +3,7 @@ import TodoList from './TodoList';
 import uuid from 'react-uuid'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import { Button, Form, FormGroup, Label, Input, FormText, InputGroup, InputGroupText } from 'reactstrap';
 // import { formatDistance, subDays } from 'date-fns'
 
 // formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true })
@@ -23,14 +23,14 @@ const Title = styled.h1`
 
 const Wrapper = styled.section`
   padding: 4em;
-  background: papayawhip;
-  background: black;
-  border-radius: 10px;
-  height: 87vh;
+  background: #1b263b;
+  background: #0d1b2a;
+  // border-radius: 10px;
+  height: 100vh;
   color: white;
 `;
 
-const Button = styled.button`
+const Button2 = styled.button`
   background-color: #555555;
   border: 2px solid #555555;
   color: white;
@@ -48,16 +48,16 @@ const Button = styled.button`
   }
 `;
 
-const Input = styled.input`
+const Input2 = styled.input`
   font-size: 18px;
   padding: 10px;
   margin: 10px;
   margin-left: 0;
   background: pink;
+  background: #e0e1dd;
   border: none;
   border-radius: 4px;
-  width: 50%;
-  max-width:600px;
+  width: 100%;
 
   ::placeholder {
     color: palevioletred;
@@ -106,24 +106,27 @@ function App() {
 
   return (
     <>
+    <FontAwesomeIcon icon="fa-square-check" />
     <Wrapper>
-      <Title>To Do List <FontAwesomeIcon icon="coffee" size="6x" border /></Title>
+      <Title>To Do List</Title>
+      {/* <FontAwesomeIcon icon="coffee" size="6x" border /> */}
       <AddTodoSection>
-      <Input type="text" placeholder="What do you need to get done?" ref={todoNameRef}></Input>
-      <Button onClick={handleAddTodo}>Add Todo</Button>
+      <Input2 type="text" placeholder="What do you need to get done?" ref={todoNameRef}></Input2>
+      
+      <Button2 onClick={handleAddTodo}>Add Todo</Button2>
       </AddTodoSection>
+
+      <Label for="exampleEmail">What do you need to get done today?</Label>
+      <InputGroup>
+        <Input type="email" name="email" id="exampleEmail" placeholder="E.g. walk dog" />
+          <Button>Add!</Button>
+      </InputGroup>
+
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <div>{todos.filter(todo => !todo.complete).length} left to do</div>
-      <Button onClick={handleClearTodos}>Clear Completed Todos</Button>
-      <FontAwesomeIcon icon="check-square" />
-    <div>
-      <FontAwesomeIcon icon={['fab', 'apple']} />
-      <FontAwesomeIcon icon={['fab', 'microsoft']} />
-      <FontAwesomeIcon icon={['fab', 'google']} />
-
-      <FontAwesomeIcon icon="check-square" size="lg" />
-      With Coffee Checked, these companies always know their coffee is hot and ready!
-    </div>
+      <Button2 onClick={handleClearTodos}>Clear Completed Todos</Button2>
+      <Button color="danger" outline>Clear Completed</Button>
+      
      </Wrapper>
     </>
   )
