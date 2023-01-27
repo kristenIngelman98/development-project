@@ -4,12 +4,7 @@ import uuid from 'react-uuid'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Label } from 'reactstrap';
-// import { formatDistance, subDays } from 'date-fns'
-
-// formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true })
-// //=> "3 days ago"
-
-// formatDistance()
+import TodaysDate from './TodaysDate';
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
@@ -102,8 +97,9 @@ function App() {
 
   return (
     <>
-    <FontAwesomeIcon icon="fa-square-check" />
+    <TodaysDate />
     <Wrapper>
+    
       <Title>To Do List</Title>
       {/* <FontAwesomeIcon icon="coffee" size="6x" border /> */}
       <Label>What do you need to get done today?</Label>

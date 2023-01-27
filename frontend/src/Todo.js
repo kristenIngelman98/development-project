@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Label = styled.label`
   display: block;
@@ -72,6 +73,18 @@ const ToDoWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const TrashCanWrapper = styled.div` 
+  margin-right: 20px;
+  padding: 10px;
+  border-radius: 5px;
+
+  svg {
+    color: #c9184a;
+  }
 `;
 
 export default function Todo({ todo, toggleTodo }) {
@@ -87,6 +100,9 @@ export default function Todo({ todo, toggleTodo }) {
         {todo.name}
         <span className="checkmark"></span>
       </Label>
+      <TrashCanWrapper>
+          <FontAwesomeIcon icon="fa-trash-can" />
+        </TrashCanWrapper>
     </ToDoWrapper>
   )
 }
