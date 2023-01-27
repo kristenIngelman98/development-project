@@ -5,14 +5,13 @@ const Label = styled.label`
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
   cursor: pointer;
-  font-size: 22px;
-  color: white;
+  font-size: 18px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-top: 0 !important;
 
   input {
     position: absolute;
@@ -32,8 +31,9 @@ const Label = styled.label`
     left: 0;
     height: 25px;
     width: 25px;
-    background-color: #eee;
-
+    background-color: #e0e1dd;
+    border-radius: 100%;
+    
     &:after {
       content: "";
       position: absolute;
@@ -43,8 +43,8 @@ const Label = styled.label`
   }
 
   .checkmark:after {
-    left: 9px;
-    top: 5px;
+    left: 10px;
+    top: 6px;
     width: 5px;
     height: 10px;
     border: solid white;
@@ -59,8 +59,19 @@ const Label = styled.label`
   }
 
   input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: #c9184a;
   }
+`;
+
+const ToDoWrapper = styled.div`
+  background-color: white;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
 `;
 
 export default function Todo({ todo, toggleTodo }) {
@@ -70,12 +81,12 @@ export default function Todo({ todo, toggleTodo }) {
   }
 
   return (
-    <div>
+    <ToDoWrapper>
       <Label>
         <input type="checkbox" checked={todo.complete} onChange={handleTodoClick} />
         {todo.name}
         <span className="checkmark"></span>
       </Label>
-    </div>
+    </ToDoWrapper>
   )
 }

@@ -3,7 +3,7 @@ import TodoList from './TodoList';
 import uuid from 'react-uuid'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Form, FormGroup, Label, Input, FormText, InputGroup, InputGroupText } from 'reactstrap';
+import { Button, Label } from 'reactstrap';
 // import { formatDistance, subDays } from 'date-fns'
 
 // formatDistance(subDays(new Date(), 3), new Date(), { addSuffix: true })
@@ -18,37 +18,29 @@ const Title = styled.h1`
   font-size: 1.em;
   text-align: center;
   color: palevioletred;
-  text-transform: uppercase;
+  // text-transform: uppercase;
+  font-family: 'Pacifico', cursive;
 `;
 
 const Wrapper = styled.section`
   padding: 4em;
   background: #1b263b;
   background: #0d1b2a;
-  // border-radius: 10px;
   height: 100vh;
   color: white;
-`;
 
-const Button2 = styled.button`
-  background-color: #555555;
-  border: 2px solid #555555;
-  color: white;
-  padding: 10px 30px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 4px;
-  transition-duration: 0.4s;
+  Button {
+    padding: 10px;
+    margin-top: 15px;
+  }
 
-  &:hover {
-    background-color: #fff;
-    color: #555555;
+  Label {
+    margin-bottom: 0;
+    margin-top: 20px;
   }
 `;
 
-const Input2 = styled.input`
+const Input = styled.input`
   font-size: 18px;
   padding: 10px;
   margin: 10px;
@@ -57,7 +49,7 @@ const Input2 = styled.input`
   background: #e0e1dd;
   border: none;
   border-radius: 4px;
-  width: 100%;
+  // width: 80%;
 
   ::placeholder {
     color: palevioletred;
@@ -65,7 +57,12 @@ const Input2 = styled.input`
 `;
 
 const AddTodoSection = styled.section`
-  text-align: center;
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+
+  Button {
+    margin: 10px 0 10px 0;
+  }
 `;
 
 
@@ -101,7 +98,6 @@ function App() {
   function handleClearTodos() {
     const newTodos = todos.filter(todo => !todo.complete)
     setTodos(newTodos)
-
   }
 
   return (
@@ -110,23 +106,17 @@ function App() {
     <Wrapper>
       <Title>To Do List</Title>
       {/* <FontAwesomeIcon icon="coffee" size="6x" border /> */}
-      <AddTodoSection>
-      <Input2 type="text" placeholder="What do you need to get done?" ref={todoNameRef}></Input2>
+      <Label>What do you need to get done today?</Label>
       
-      <Button2 onClick={handleAddTodo}>Add Todo</Button2>
+      <AddTodoSection>
+        <Input type="text" placeholder="" ref={todoNameRef}></Input>
+        <Button onClick={handleAddTodo} variant="light">Add!</Button>
       </AddTodoSection>
 
-      <Label for="exampleEmail">What do you need to get done today?</Label>
-      <InputGroup>
-        <Input type="email" name="email" id="exampleEmail" placeholder="E.g. walk dog" />
-          <Button>Add!</Button>
-      </InputGroup>
 
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <div>{todos.filter(todo => !todo.complete).length} left to do</div>
-      <Button2 onClick={handleClearTodos}>Clear Completed Todos</Button2>
-      <Button color="danger" outline>Clear Completed</Button>
-      
+      <Button onClick={handleClearTodos} color="danger">Clear Completed</Button>
      </Wrapper>
     </>
   )
