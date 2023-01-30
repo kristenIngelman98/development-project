@@ -87,8 +87,8 @@ const TrashCanWrapper = styled.div`
   }
 `;
 
-export default function Todo({ todo, toggleTodo }) {
-
+export default function Todo({ todo, toggleTodo, deleteSingleTodo }) {
+  
   function handleTodoClick() {
     toggleTodo(todo.id)
   }
@@ -97,11 +97,11 @@ export default function Todo({ todo, toggleTodo }) {
     <ToDoWrapper>
       <Label>
         <input type="checkbox" checked={todo.complete} onChange={handleTodoClick} />
-        {todo.name}
+        {todo.todo || todo.name}
         <span className="checkmark"></span>
       </Label>
       <TrashCanWrapper>
-          <FontAwesomeIcon icon="fa-trash-can" />
+          <FontAwesomeIcon icon="fa-trash-can" onClick={() => deleteSingleTodo(todo)} />
         </TrashCanWrapper>
     </ToDoWrapper>
   )
