@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-// import TodoList from './TodoList';
 // import uuid from 'react-uuid'
 import styled from 'styled-components';
 import { Button, Label } from 'reactstrap';
@@ -8,17 +7,14 @@ import axios from 'axios';
 import { format } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment, incrementByAmount } from './features/counter/counterSlice';
+import { todoAdded } from './features/todos/todosSlice';
+import AddTodo from './features/todos/AddTodo';
+import Intro from './features/header/Intro';
+import TodoList from './features/todos/TodoList';
 
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
 // Styled Components 
-const Title = styled.h1`
-  font-size: 1.em;
-  text-align: center;
-  color: palevioletred;
-  font-family: 'Pacifico', cursive;
-`;
-
 const Wrapper = styled.section`
   padding: 4em;
   background: #1b263b;
@@ -63,8 +59,8 @@ const AddTodoSection = styled.section`
 
 function App() {
   // using REDUX
-  const { count } = useSelector((state) => state.counter);
-  const dispatch = useDispatch();
+//   const { count } = useSelector((state) => state.counter);
+//   const dispatch = useDispatch();
 
 
 
@@ -90,7 +86,7 @@ function App() {
   // useEffect saves all todos to local storage
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos))
-    localStorage.clear();
+    // localStorage.clear();
   }, [todos])
 
  
@@ -172,24 +168,18 @@ function App() {
 
   return (
     <>
-      <div className="App">
-      <h1> The count is: {count}</h1>
-      <button onClick={() => dispatch(increment())}>increment</button>
-      <button onClick={() => dispatch(decrement())}>decrement</button>
-      <button onClick={() => dispatch(incrementByAmount(33))}>
-        Increment by 33
-      </button>
-    </div>
-      <TodaysDate />
+      {/* <TodaysDate /> */}
       {time}
       <Wrapper>
-        <Title>To Do List</Title>
-        <Label>What do you need to get done today?</Label>
+        <Intro />
         <AddTodoSection>
-          <Input type="text" placeholder="" ref={todoNameRef} value={todo} onChange={(e) => setTodo(e.target.value)}></Input>
-          <Button onClick={handleAddTodo} type="submit" variant="light">Add!</Button>
+        {/* <Input type="text" placeholder="" ref={todoNameRef} value={todo} onChange={(e) => todoAdded(e.target.value)}></Input> */}
+          {/* <Input type="text" placeholder="" ref={todoNameRef} value={todo} onChange={(e) =>setTodo(e.target.value)}></Input>
+          <Button onClick={handleAddTodo} type="submit" variant="light">Add!</Button> */}
+            <AddTodo />
+            
         </AddTodoSection>
-        {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteSingleTodo={deleteSingleTodo} /> */}
+        <TodoList />
         <div>{todos.filter(todo => !todo.complete).length} left to do</div>
         <Button onClick={handleClearTodos} color="danger">Clear Completed</Button>
       </Wrapper>

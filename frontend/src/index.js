@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from "react-redux";
+import store from './redux/store';
+import AppThird from './AppThird';
 import App from './App';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
@@ -12,7 +15,9 @@ library.add(fab, faCheckSquare, faCoffee, faTrashCan)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <AppThird />
+    </Provider>
   </React.StrictMode>
 );
 

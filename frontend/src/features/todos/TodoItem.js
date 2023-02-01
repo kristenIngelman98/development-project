@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useDispatch } from 'react-redux';
+import { deleteTodo } from './todosSlice';
 
 const Label = styled.label`
   display: block;
@@ -87,21 +89,29 @@ const TrashCanWrapper = styled.div`
   }
 `;
 
-export default function Todo({ todo, toggleTodo, deleteSingleTodo }) {
-  
+export default function TodoItem({ id, title, todo, toggleTodo, deleteSingleTodo }) {
+    const dispatch = useDispatch()
+
+    function removeItem() {
+        dispatch(
+            deleteTodo({
+                id: id
+            })
+        )
+    }
   function handleTodoClick() {
-    toggleTodo(todo.id)
+    console.log('todo is checked off')
   }
 
   return (
     <ToDoWrapper>
       <Label>
         <input type="checkbox" checked={todo.complete} onChange={handleTodoClick} />
-        {todo.todo || todo.name}
+        {todo.todo || todo.name || title}
         <span className="checkmark"></span>
       </Label>
       <TrashCanWrapper>
-          <FontAwesomeIcon icon="fa-trash-can" onClick={() => deleteSingleTodo(todo)} />
+          <FontAwesomeIcon icon="fa-trash-can" onClick={() => removeItem()} />
         </TrashCanWrapper>
     </ToDoWrapper>
   )

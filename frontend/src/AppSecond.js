@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-// import TodoList from './TodoList';
+import TodoList from './TodoList';
 // import uuid from 'react-uuid'
 import styled from 'styled-components';
 import { Button, Label } from 'reactstrap';
@@ -8,7 +8,10 @@ import axios from 'axios';
 import { format } from 'date-fns'
 import { useDispatch, useSelector } from 'react-redux';
 import { decrement, increment, incrementByAmount } from './features/counter/counterSlice';
-
+import Counter from './features/counter/Counter';
+import { updatedDate, updatedTime } from './features/date/dateSlice';
+import Date from './features/date/Date';
+import AddTodo from './features/todos/AddTodo';
 const LOCAL_STORAGE_KEY = 'todoApp.todos'
 
 // Styled Components 
@@ -63,11 +66,12 @@ const AddTodoSection = styled.section`
 
 function App() {
   // using REDUX
-  const { count } = useSelector((state) => state.counter);
+//   const { date, time } = useSelector((state) => state.calcDate);
   const dispatch = useDispatch();
 
 
-
+  const [todo, setTodo] = useState(''); // sets input value from form field
+  
   const [todos, setTodos] = useState(() => {
     // getting stored value
     const saved = localStorage.getItem(LOCAL_STORAGE_KEY)
@@ -75,7 +79,7 @@ function App() {
     return initialValue || []
   });
 
-  const [todo, setTodo] = useState(''); // is this needed?! yes
+  
   const current_date = format(new Date(), "MMM d, y")
   const current_time = format(new Date(), "h:mm aaa")
   
@@ -83,7 +87,21 @@ function App() {
   
   useEffect(() => {
     setInterval(() => setTime(format(new Date(), "h:mm aaa")), 30000)
+    // setInterval{() => dispatch(updatedTime(format(new Date(), "h:mm aaa"))}, 30000)
+    // console.log('updated')
+
+        // var time = 0
+        // var lastUpdate = new Date()
+
+        // setInterval(() => {
+        // var now = new Date()
+        // var dt = now - lastUpdate
+        // time += dt
+        // lastUpdate = now
+        // console.log(dt, time)
+        // }, 1000)
   },[])
+
 
   const todoNameRef = useRef() // add comment about what this does
 
@@ -172,24 +190,25 @@ function App() {
 
   return (
     <>
-      <div className="App">
-      <h1> The count is: {count}</h1>
-      <button onClick={() => dispatch(increment())}>increment</button>
-      <button onClick={() => dispatch(decrement())}>decrement</button>
-      <button onClick={() => dispatch(incrementByAmount(33))}>
-        Increment by 33
-      </button>
-    </div>
-      <TodaysDate />
-      {time}
+    <Counter />
+    <Date />
+    {/* <TodaysDate /> */}
+      {/* {time} */}
       <Wrapper>
         <Title>To Do List</Title>
         <Label>What do you need to get done today?</Label>
+        {/* <AddTodoSection> */}
+          {/* <Input type="text" placeholder="" ref={todoNameRef} value={todo} onChange={(e) => setTodo(e.target.value)}></Input>
+          <Button onClick={handleAddTodo} type="submit" variant="light">Add!</Button> */}
+        {/* <Input type="text" placeholder="" ref={todoNameRef} value={todo} onChange={(e) => setTodo(e.target.value)}></Input>
+          <Button onClick={handleAddTodo} type="submit" variant="light">Add!</Button> */}
+          <AddTodo />
+        {/* </AddTodoSection> */}
         <AddTodoSection>
           <Input type="text" placeholder="" ref={todoNameRef} value={todo} onChange={(e) => setTodo(e.target.value)}></Input>
           <Button onClick={handleAddTodo} type="submit" variant="light">Add!</Button>
         </AddTodoSection>
-        {/* <TodoList todos={todos} toggleTodo={toggleTodo} deleteSingleTodo={deleteSingleTodo} /> */}
+        <TodoList todos={todos} toggleTodo={toggleTodo} deleteSingleTodo={deleteSingleTodo} />
         <div>{todos.filter(todo => !todo.complete).length} left to do</div>
         <Button onClick={handleClearTodos} color="danger">Clear Completed</Button>
       </Wrapper>
