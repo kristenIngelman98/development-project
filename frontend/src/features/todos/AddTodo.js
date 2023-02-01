@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { addTodo } from './todosSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Button, Label } from 'reactstrap';
+import { Button } from 'reactstrap';
 
 
 const Input = styled.input`

@@ -89,7 +89,7 @@ const TrashCanWrapper = styled.div`
   }
 `;
 
-export default function TodoItem({ id, title, todo, toggleTodo, deleteSingleTodo }) {
+export default function TodoItem({ id, title, todo }) {
     const dispatch = useDispatch()
 
     function removeItem() {
@@ -101,6 +101,8 @@ export default function TodoItem({ id, title, todo, toggleTodo, deleteSingleTodo
     }
   function handleTodoClick() {
     console.log('todo is checked off')
+    // if checked, add to array, if checked again, remove from array***
+    // loop through array for bulk delete and add another reducer func in todoSlice**
   }
 
   return (

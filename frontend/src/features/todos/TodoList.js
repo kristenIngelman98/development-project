@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import TodoItem from './TodoItem'
 
-export default function TodoList({ todos2, toggleTodo, deleteSingleTodo }) {
+export default function TodoList({  toggleTodo }) { // remove toggleTodo
     const todos = useSelector((state) => {
         return state.tasks;
     })
